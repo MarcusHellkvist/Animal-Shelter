@@ -21,7 +21,7 @@ Console.WriteLine(shelter.GetAnimal(1).GetName());
 var myShelter = shelter.GetAnimals();
 foreach (Animal animal in myShelter)
 {
-    animal.MakeSound();
+    animal.PerformSound();
 }
 
 
@@ -64,11 +64,26 @@ public class Shelter
 
 }
 
+public interface ISoundBehavior 
+{
+    void MakeSound();
+}
+
+public class Bark : ISoundBehavior
+{
+    public void MakeSound()
+    {
+        Console.WriteLine("Voff!");
+    }
+}
+
 public abstract class Animal
 {
 
     public string Name { get; set; }
     public int Id { get; set; }
+
+    public ISoundBehavior soundBehavior;
 
     public Animal(string name, int id)
     {
@@ -86,9 +101,9 @@ public abstract class Animal
         return this.Name;
     }
 
-    public virtual void MakeSound()
+    public void PerformSound()
     {
-        Console.WriteLine("Generic sound!");
+        soundBehavior.MakeSound();
     }
 }
 
@@ -96,10 +111,6 @@ public class Dog : Animal
 {
     public Dog(string name, int id) : base(name, id)
     {
-    }
-
-    public override void MakeSound()
-    {
-        Console.WriteLine("Voff!");
+        soundBehavior = new Bark();
     }
 }
