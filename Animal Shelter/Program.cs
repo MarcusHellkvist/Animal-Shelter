@@ -21,7 +21,7 @@ Console.WriteLine(shelter.GetAnimal(1).GetName());
 var myShelter = shelter.GetAnimals();
 foreach (Animal animal in myShelter)
 {
-    animal.PerformSound();
+    animal.PerformSound(); // Jag vet att funktionen skulle heta MakeSound, men eftersom den ligger i Interfacet istället så ville jag inte röra till det med två funktioner av samma namn
 }
 
 
